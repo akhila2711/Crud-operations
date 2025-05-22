@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basic Crud</title>
+    <script>
+        function showEditForm(id, title, author) {
+            document.getElementById('updateForm').style.display = 'block';
+            document.getElementById('updateId').value = id;
+            document.getElementById('updateTitle').value = title;
+            document.getElementById('updateAuthor').value = author;
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+    </script>
 </head>
 <body>
     <h1>CRUD OPERATIONS -MongoDB</h1>
@@ -11,18 +20,31 @@
 
     <h3>Create</h3>
     <form action="/store-book" method="POST">
-        <label for =" ">Title</label>
+        <label>Title</label>
         <input type="text" name="title">
-         <label for =" ">Author</label>
+        <label>Author</label>
         <input type="text" name="author">
-       <input type="submit">
+        <input type="submit">
     </form>
 
-    <br> <br>
+    <br><br>
     <ul>
         {{#each library}}
-        <li>{{this.title}}-{{this.author}}</li>
+        <li>
+            {{this.title}} - {{this.author}}
+            <button type="button" onclick="showEditForm('{{this._id}}', '{{this.title}}', '{{this.author}}')">Edit</button>
+        </li>
         {{/each}}
     </ul>
+
+    <!-- Update Form (hidden by default) -->
+    <form id="updateForm" action="/update-book" method="POST" style="display:none; margin-top:20px;">
+        <input type="hidden" name="id" id="updateId">
+        <label>Title</label>
+        <input type="text" name="title" id="updateTitle">
+        <label>Author</label>
+        <input type="text" name="author" id="updateAuthor">
+        <input type="submit" value="Update">
+    </form>
 </body>
 </html>
