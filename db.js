@@ -1,5 +1,5 @@
 const db=require('mongodb')
-const mongoClient=db.mongoClient
+const mongoClient=db.MongoClient
 
 let database
 
@@ -12,4 +12,4 @@ async function getdataBase(){
     }
     return database
 }
-module.exports=getdataBase()
+module.exports={getdataBase}

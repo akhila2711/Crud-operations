@@ -7,14 +7,14 @@ const dbo=require('./db')
 app.engine('hbs',ehbs.engine({layoutsDir:'views',defaultLayout:"main",extname:"hbs"}))
 app.set("views","views")
 
-app.get('/',async (req,res)=>{
-    let database= await dbo.getdataBase()
-    const collection =database.collection("books")
-    const cursor=collection.find({})
-    let employee=cursor.toArray()
-    let message=" "
-    res.render('main.hbs',{message})
-})
+app.get('/', async (req, res) => {
+    let database = await dbo.getdataBase();
+    const collection = database.collection("books");
+    const cursor = collection.find({});
+    let library = await cursor.toArray(); // Await the data
+    let message = " ";
+    res.render('main.hbs', { message, library }); // Pass 'library' to template
+});
 
 app.listen(8000,()=>{
     console.log("listening to port 8000")
