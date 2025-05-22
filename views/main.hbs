@@ -7,7 +7,18 @@
 </head>
 <body>
     <h1>CRUD OPERATIONS -MongoDB</h1>
-    {{message}}
+    {{message}}<br>
+
+    <h3>Create</h3>
+    <form action="/store-book" method="POST">
+        <label for =" ">Title</label>
+        <input type="text" name="title">
+         <label for =" ">Author</label>
+        <input type="text" name="author">
+       <input type="submit">
+    </form>
+
+    <br> <br>
     <ul>
         {{#each library}}
         <li>{{this.title}}-{{this.author}}</li>
