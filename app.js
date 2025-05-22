@@ -19,6 +19,9 @@ app.get('/', async (req, res) => {
 app.post('/store-book',async(req,res)=>{
       let database = await dbo.getdataBase();
     const collection = database.collection("books");
+    let book={title:req.body.title,author:req.body.author}
+    collection.insertOne(book)
+    return res.redirect('/?status=1')
 
 })
 
